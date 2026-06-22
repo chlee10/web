@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>개인 소개 | 포트폴리오</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+    :root {
+      --bg-1: #f7f4ec;
+      --bg-2: #e8f3f1;
+      --ink: #1f2937;
+      --ink-soft: #4b5563;
+      --brand: #0f766e;
+      --brand-2: #f59e0b;
+      --card: rgba(255, 255, 255, 0.8);
+      --line: rgba(15, 118, 110, 0.18);
+      --shadow: 0 14px 36px rgba(31, 41, 55, 0.12);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(245, 158, 11, 0.28), transparent 28%),
+        radial-gradient(circle at 88% 20%, rgba(15, 118, 110, 0.24), transparent 26%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(15, 118, 110, 0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(15, 118, 110, 0.06) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
+      z-index: -1;
+    }
+
+    .container {
+      width: min(960px, 92%);
+      margin: 0 auto;
+      padding: 20px 0 36px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 10px;
+      z-index: 5;
+      margin-bottom: 18px;
+    }
+
+    .nav {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(15, 118, 110, 0.08);
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      font-family: 'Do Hyeon', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      color: var(--brand);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 999px;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), #0d9488);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow);
+      padding: 24px 20px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -34px;
+      top: -34px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.3), transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(15, 118, 110, 0.12);
+      color: var(--brand);
+      font-size: 0.78rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+    }
+
+    h1,
+    h2 {
+      font-family: 'Do Hyeon', sans-serif;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(1.7rem, 5.8vw, 2.7rem);
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      font-size: 0.98rem;
+      color: var(--ink-soft);
+      max-width: 58ch;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-size: 1.42rem;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .section-desc {
+      font-size: 0.93rem;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+    }
+
+    .chips {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(245, 158, 11, 0.18));
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .projects {
+      display: grid;
+      gap: 10px;
+    }
+
+    .project {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .project h3 {
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .project p {
+      font-size: 0.89rem;
+      color: var(--ink-soft);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .contact-link:hover {
+      transform: translateX(3px);
+      border-color: rgba(15, 118, 110, 0.45);
+    }
+
+    .arrow {
+      color: var(--brand);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #6b7280;
+      font-size: 0.82rem;
+      padding-bottom: 6px;
+    }
+
+    @media (min-width: 760px) {
+      .container {
+        padding-top: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      #about {
+        grid-column: 1 / -1;
+      }
+
+      .hero {
+        padding: 32px;
+      }
+
+      .nav-links a {
+        font-size: 0.88rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <div class="container">
+    <header class="topbar">
+      <nav class="nav" aria-label="주요 섹션">
+        <div class="logo">MINI PROFILE</div>
+        <ul class="nav-links">
+          <li><a href="#about" class="active">소개</a></li>
+          <li><a href="#skills">기술</a></li>
+          <li><a href="#projects">프로젝트</a></li>
+          <li><a href="#contact">연락처</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <span class="eyebrow">HELLO</span>
+      <h1>김개발입니다</h1>
+      <p class="intro">
+        사용자 경험과 성능을 함께 고민하는 프론트엔드 개발자입니다.
+        작은 디테일이 서비스의 신뢰를 만든다고 믿고, 빠르고 읽기 쉬운 코드를 지향합니다.
+      </p>
+    </section>
+
+    <main class="grid">
+      <section class="card reveal" id="about">
+        <h2>소개글</h2>
+        <p class="section-desc">
+          기획 의도를 화면으로 명확하게 전달하는 일을 좋아합니다. 디자인 시스템 정리,
+          컴포넌트 재사용성 개선, 모바일 UI 최적화 경험이 많습니다.
+        </p>
+      </section>
+
+      <section class="card reveal" id="skills">
+        <h2>보유 기술</h2>
+        <p class="section-desc">실무에서 자주 사용하는 기술 스택입니다.</p>
+        <ul class="chips">
+          <li class="chip">HTML5</li>
+          <li class="chip">CSS3 / Sass</li>
+          <li class="chip">JavaScript (ES6+)</li>
+          <li class="chip">TypeScript</li>
+          <li class="chip">React</li>
+          <li class="chip">Next.js</li>
+          <li class="chip">Node.js</li>
+          <li class="chip">Git / GitHub</li>
+        </ul>
+      </section>
+
+      <section class="card reveal" id="projects">
+        <h2>프로젝트</h2>
+        <p class="section-desc">최근 진행한 주요 작업입니다.</p>
+        <div class="projects">
+          <article class="project">
+            <h3>모바일 쇼핑 앱 리뉴얼</h3>
+            <p>초기 로딩 성능 38% 개선, 장바구니 전환율 14% 상승.</p>
+          </article>
+          <article class="project">
+            <h3>사내 디자인 시스템 구축</h3>
+            <p>공통 컴포넌트 32종 정리, 개발 속도 및 일관성 향상.</p>
+          </article>
+          <article class="project">
+            <h3>대시보드 접근성 개선</h3>
+            <p>WCAG 기준 반영, 키보드 탐색 및 스크린리더 사용성 강화.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card reveal" id="contact">
+        <h2>연락처</h2>
+        <p class="section-desc">아래 채널로 편하게 연락 주세요.</p>
+        <ul class="contact-list">
+          <li>
+            <a class="contact-link" href="mailto:hello@example.com">
+              <span>이메일: hello@example.com</span>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="https://github.com/your-id" target="_blank" rel="noopener noreferrer">
+              <span>GitHub: github.com/your-id</span>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+              <span>LinkedIn: 프로필 보기</span>
+              <span class="arrow">→</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">© 2026 Kim Developer Portfolio</footer>
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section[id]');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('show');
+            }, index * 80);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const setActiveLink = () => {
+      let current = 'about';
+      sections.forEach((section) => {
+        const top = section.offsetTop - 120;
+        if (window.scrollY >= top) current = section.id;
+      });
+
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${current}`;
+        link.classList.toggle('active', isActive);
+      });
+    };
+
+    const renderSkills = (items = []) => {
+      const skillsList = document.querySelector('#skills .chips');
+      if (!skillsList) return;
+
+      skillsList.innerHTML = items
+        .map((item) => `<li class="chip">${item}</li>`)
+        .join('');
+    };
+
+    const renderProjects = (items = []) => {
+      const projectsWrap = document.querySelector('#projects .projects');
+      if (!projectsWrap) return;
+
+      projectsWrap.innerHTML = items
+        .map(
+          (item) => `
+            <article class="project">
+              <h3>${item.title}</h3>
+              <p>${item.description}</p>
+            </article>
+          `
+        )
+        .join('');
+    };
+
+    const renderContacts = (items = []) => {
+      const contactList = document.querySelector('#contact .contact-list');
+      if (!contactList) return;
+
+      contactList.innerHTML = items
+        .map((item) => {
+          const isExternal = /^https?:\/\//.test(item.url);
+          const extraAttr = isExternal ? 'target="_blank" rel="noopener noreferrer"' : '';
+
+          return `
+            <li>
+              <a class="contact-link" href="${item.url}" ${extraAttr}>
+                <span>${item.label}: ${item.text}</span>
+                <span class="arrow">→</span>
+              </a>
+            </li>
+          `;
+        })
+        .join('');
+    };
+
+    const applyContent = (data) => {
+      document.querySelector('.logo').textContent = data.meta.logo;
+      document.querySelector('.eyebrow').textContent = data.meta.eyebrow;
+      document.querySelector('.hero h1').textContent = data.meta.name;
+      document.querySelector('.footer').textContent = data.meta.footer;
+
+      document.querySelector('.hero .intro').textContent = data.about.heroIntro;
+      document.querySelector('#about h2').textContent = data.about.title;
+      document.querySelector('#about .section-desc').textContent = data.about.description;
+
+      document.querySelector('#skills h2').textContent = data.skills.title;
+      document.querySelector('#skills .section-desc').textContent = data.skills.description;
+
+      document.querySelector('#projects h2').textContent = data.projects.title;
+      document.querySelector('#projects .section-desc').textContent = data.projects.description;
+
+      document.querySelector('#contact h2').textContent = data.contact.title;
+      document.querySelector('#contact .section-desc').textContent = data.contact.description;
+
+      renderSkills(data.skills.items);
+      renderProjects(data.projects.items);
+      renderContacts(data.contact.items);
+    };
+
+    // If JSON loading fails (for example via file://), keep built-in fallback content.
+    const loadContent = async () => {
+      try {
+        const response = await fetch('./content.json');
+        if (!response.ok) throw new Error('content.json load failed');
+        const data = await response.json();
+        applyContent(data);
+      } catch (error) {
+        console.warn('JSON content load skipped:', error.message);
+      }
+    };
+
+    setActiveLink();
+    window.addEventListener('scroll', setActiveLink, { passive: true });
+    loadContent();
+  </script>
+</body>
+</html>

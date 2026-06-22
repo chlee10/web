@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "logo": "MINI PROFILE",
+    "eyebrow": "HELLO",
+    "name": "이치훈입니다",
+    "footer": "© 2026 Kim Developer Portfolio"
+  },
+  "about": {
+    "heroIntro": "사용자 경험과 성능을 함께 고민하는 프론트엔드 개발자입니다. 작은 디테일이 서비스의 신뢰를 만든다고 믿고, 빠르고 읽기 쉬운 코드를 지향합니다.",
+    "title": "소개글",
+    "description": "기획 의도를 화면으로 명확하게 전달하는 일을 좋아합니다. 디자인 시스템 정리, 컴포넌트 재사용성 개선, 모바일 UI 최적화 경험이 많습니다."
+  },
+  "skills": {
+    "title": "보유 기술",
+    "description": "실무에서 자주 사용하는 기술 스택입니다.",
+    "items": [
+      "HTML5",
+      "CSS3 / Sass",
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Git / GitHub"
+    ]
+  },
+  "projects": {
+    "title": "프로젝트",
+    "description": "최근 진행한 주요 작업입니다.",
+    "items": [
+      {
+        "title": "모바일 쇼핑 앱 리뉴얼",
+        "description": "초기 로딩 성능 38% 개선, 장바구니 전환율 14% 상승."
+      },
+      {
+        "title": "사내 디자인 시스템 구축",
+        "description": "공통 컴포넌트 32종 정리, 개발 속도 및 일관성 향상."
+      },
+      {
+        "title": "대시보드 접근성 개선",
+        "description": "WCAG 기준 반영, 키보드 탐색 및 스크린리더 사용성 강화."
+      }
+    ]
+  },
+  "contact": {
+    "title": "연락처",
+    "description": "아래 채널로 편하게 연락 주세요.",
+    "items": [
+      {
+        "label": "이메일",
+        "text": "hello@example.com",
+        "url": "mailto:hello@example.com"
+      },
+      {
+        "label": "GitHub",
+        "text": "github.com/your-id",
+        "url": "https://github.com/your-id"
+      },
+      {
+        "label": "LinkedIn",
+        "text": "프로필 보기",
+        "url": "https://www.linkedin.com"
+      }
+    ]
+  }
+}
