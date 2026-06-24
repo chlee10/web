@@ -3,7 +3,7 @@
     "logo": "MINI PROFILE",
     "eyebrow": "HELLO",
     "name": "이치훈입니다",
-    "footer": "© 2026 Kim Developer Portfolio"
+    "footer": "© 2026 이치훈 Portfolio"
   },
   "about": {
     "heroIntro": "사용자 경험과 성능을 함께 고민하는 프론트엔드 개발자입니다. 작은 디테일이 서비스의 신뢰를 만든다고 믿고, 빠르고 읽기 쉬운 코드를 지향합니다.",
@@ -48,13 +48,13 @@
     "items": [
       {
         "label": "이메일",
-        "text": "hello@example.com",
-        "url": "mailto:hello@example.com"
+        "text": "chlee.chihoon@gmail.com",
+        "url": "mailto:chlee.chihoon@gmail.com"
       },
       {
         "label": "GitHub",
-        "text": "github.com/your-id",
-        "url": "https://github.com/your-id"
+        "text": "github.com/chlee10",
+        "url": "https://github.com/chlee10"
       },
       {
         "label": "LinkedIn",
